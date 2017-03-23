@@ -7,13 +7,17 @@ public class Server {
 		ServerSocket serverSock = null;
 		Socket clientSock = null;
 		DataInputStream input;
+		PrintStream output;
 
 		while (true) {
 			try {
 				// Listen on port
 				serverSock = new ServerSocket(PORT_NUMBER);
 				System.out.println("Listening...");
-
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
 				// Get connection
 				clientSock = serverSock.accept();
 				System.out.println("Connected client");
@@ -23,9 +27,13 @@ public class Server {
 				// InputStreamReader(clientSock.getInputStream()));
 
 				input = new DataInputStream(clientSock.getInputStream());
+				output = new PrintStream(clientSock.getOutputStream());
+
 				System.out.println(input);
 				System.out.println(clientSock.getInetAddress() + " connected");
 
+				output.close();
+				input.close();
 				serverSock.close();
 				clientSock.close();
 			} catch (Exception e) {
