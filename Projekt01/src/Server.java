@@ -9,15 +9,18 @@ public class Server {
 		DataInputStream input;
 		PrintStream output;
 
+		try {
+			// Listen on port
+			serverSock = new ServerSocket(PORT_NUMBER);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		while (true) {
+
 			try {
-				// Listen on port
-				serverSock = new ServerSocket(PORT_NUMBER);
-				System.out.println("Listening...");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			try {
+				//System.out.println("Listening...");
 				// Get connection
 				clientSock = serverSock.accept();
 				System.out.println("Connected client");
@@ -37,7 +40,7 @@ public class Server {
 				serverSock.close();
 				clientSock.close();
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 	}
