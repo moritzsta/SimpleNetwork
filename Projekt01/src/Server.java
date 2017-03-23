@@ -9,18 +9,12 @@ public class Server {
 		DataInputStream input;
 		PrintStream output;
 
-		try {
-			// Listen on port
-			serverSock = new ServerSocket(PORT_NUMBER);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		while (true) {
 
 			try {
-				//System.out.println("Listening...");
+				serverSock = new ServerSocket(PORT_NUMBER);
+				System.out.println("Listening...");
 				// Get connection
 				clientSock = serverSock.accept();
 				System.out.println("Connected client");
